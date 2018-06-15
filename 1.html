@@ -1,0 +1,286 @@
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>calendar</title>
+    <link href="1.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+    <div class="main-left">
+        <div id="left-weekday"></div>
+        <div id="left-day"></div>
+        <input id="note" placeholder="Note">
+        <div id="left-todo">add your plans in todolist</div>
+        <img id="add-pic" src="add.png" onclick="todo()">
+    </div>
+    <div id="container">
+        <div class="top">
+            <div class="top-left" onclick="add1()">❮</div>
+            <div class="top-left" onclick="add()">❮</div>
+            <div id="month-name">APRIL</div>
+            <div class="top-right" onclick="minus()">❯</div>
+            <div class="top-right" onclick="minus1()">❯</div>
+        </div>
+
+        <div id="content">
+            <table id="calendar">
+            </table>
+        </div>
+        <input id="year" value="2016年7月" oninput="newDate()" />
+    </div>
+    <script type="text/javascript">
+        function newDate() {
+            var date_in = document.getElementById("year");
+            var date = date_in.value;
+            date = date.replace('年', '').replace('月', '');
+            var year = date.substring(0, 4);
+            var month = date.substring(4);
+            year = Number(year);
+            month = Number(month);
+            createC(year, month);
+        }
+        function todo() {
+            document.getElementById("note").value = "";
+
+        }
+        function removeChildren(pnode) {
+            var childs = pnode.childNodes;
+            for (var i = childs.length - 1; i >= 0; i--) {
+                pnode.removeChild(childs.item(i));
+            }
+
+        }
+        function add() {
+            var date_in = document.getElementById("year");
+            var date = date_in.value;
+            date = date.replace('年', '').replace('月', '');
+            var year = date.substring(0, 4);
+            var month = date.substring(4);
+            year = Number(year);
+            month = Number(month);
+            if (month == 1) {
+                month = 12;
+                year -= 1;
+            } else {
+                month -= 1;
+            }
+            date_in.value = year + "年" + month + "月";
+            var monthName = document.getElementById("month-name");
+            switch (month) {
+                case 1: monthName.innerHTML = "January " + year; break;
+                case 2: monthName.innerHTML = "February " + year; break;
+                case 3: monthName.innerHTML = "March " + year; break;
+                case 4: monthName.innerHTML = "April " + year; break;
+                case 5: monthName.innerHTML = "May " + year; break;
+                case 6: monthName.innerHTML = "June " + year; break;
+                case 7: monthName.innerHTML = "July " + year; break;
+                case 8: monthName.innerHTML = "August " + year; break;
+                case 9: monthName.innerHTML = "September " + year; break;
+                case 10: monthName.innerHTML = "October " + year; break;
+                case 11: monthName.innerHTML = "November " + year; break;
+                case 12: monthName.innerHTML = "December " + year; break;
+            }
+            createC(year, month);
+            document.getElementById("left-weekday").innerHTML = "";
+            document.getElementById("left-day").innerHTML = "";
+        }
+        function add1() {
+            var date_in = document.getElementById("year");
+            var date = date_in.value;
+            date = date.replace('年', '').replace('月', '');
+            var year = date.substring(0, 4);
+            var month = date.substring(4);
+            year = Number(year);
+            month = Number(month);
+            year--;
+            date_in.value = year + "年" + month + "月";
+            var monthName = document.getElementById("month-name");
+            switch (month) {
+                case 1: monthName.innerHTML = "January " + year; break;
+                case 2: monthName.innerHTML = "February " + year; break;
+                case 3: monthName.innerHTML = "March " + year; break;
+                case 4: monthName.innerHTML = "April " + year; break;
+                case 5: monthName.innerHTML = "May " + year; break;
+                case 6: monthName.innerHTML = "June " + year; break;
+                case 7: monthName.innerHTML = "July " + year; break;
+                case 8: monthName.innerHTML = "August " + year; break;
+                case 9: monthName.innerHTML = "September " + year; break;
+                case 10: monthName.innerHTML = "October " + year; break;
+                case 11: monthName.innerHTML = "November " + year; break;
+                case 12: monthName.innerHTML = "December " + year; break;
+            }
+            createC(year, month);
+            document.getElementById("left-weekday").innerHTML = "";
+            document.getElementById("left-day").innerHTML = "";
+        }
+        function minus() {
+            var date_in = document.getElementById("year");
+            var date = date_in.value;
+            date = date.replace('年', '').replace('月', '');
+            var year = date.substring(0, 4);
+            var month = date.substring(4);
+            year = Number(year);
+            month = Number(month);
+            if (month == 12) {
+                month = 1;
+                year = year + 1;
+            } else {
+                month = month + 1;
+            }
+            date_in.value = year + "年" + month + "月";
+            var monthName = document.getElementById("month-name");
+            switch (month) {
+                case 1: monthName.innerHTML = "January " + year; break;
+                case 2: monthName.innerHTML = "February " + year; break;
+                case 3: monthName.innerHTML = "March " + year; break;
+                case 4: monthName.innerHTML = "April " + year; break;
+                case 5: monthName.innerHTML = "May " + year; break;
+                case 6: monthName.innerHTML = "June " + year; break;
+                case 7: monthName.innerHTML = "July " + year; break;
+                case 8: monthName.innerHTML = "August " + year; break;
+                case 9: monthName.innerHTML = "September " + year; break;
+                case 10: monthName.innerHTML = "October " + year; break;
+                case 11: monthName.innerHTML = "November " + year; break;
+                case 12: monthName.innerHTML = "December " + year; break;
+            }
+            createC(year, month);
+            document.getElementById("left-weekday").innerHTML = "";
+            document.getElementById("left-day").innerHTML = "";
+        }
+        function minus1() {
+            var date_in = document.getElementById("year");
+            var date = date_in.value;
+            date = date.replace('年', '').replace('月', '');
+            var year = date.substring(0, 4);
+            var month = date.substring(4);
+            year = Number(year);
+            month = Number(month);
+            year++;
+            date_in.value = year + "年" + month + "月";
+            var monthName = document.getElementById("month-name");
+            switch (month) {
+                case 1: monthName.innerHTML = "January " + year; break;
+                case 2: monthName.innerHTML = "February " + year; break;
+                case 3: monthName.innerHTML = "March " + year; break;
+                case 4: monthName.innerHTML = "April " + year; break;
+                case 5: monthName.innerHTML = "May " + year; break;
+                case 6: monthName.innerHTML = "June " + year; break;
+                case 7: monthName.innerHTML = "July " + year; break;
+                case 8: monthName.innerHTML = "August " + year; break;
+                case 9: monthName.innerHTML = "September " + year; break;
+                case 10: monthName.innerHTML = "October " + year; break;
+                case 11: monthName.innerHTML = "November " + year; break;
+                case 12: monthName.innerHTML = "December " + year; break;
+            }
+            createC(year, month);
+            document.getElementById("left-weekday").innerHTML = "";
+            document.getElementById("left-day").innerHTML = "";
+        }
+        function is_leap(year) {
+            return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
+        }
+        function createC(year, month) {
+            var calend = document.getElementById('calendar');
+            removeChildren(calend);
+            var tr_title = document.createElement('tr');
+            var titles = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+            for (var m = 0; m < titles.length; m++) {
+                var td_title = document.createElement('td');
+                td_title.className = "td_title";
+                td_title.innerText = titles[m];
+                tr_title.appendChild(td_title);
+            }
+            calend.appendChild(tr_title);
+            year = Number(year);
+            month = Number(month) - 1;
+            var nstr = new Date(year, month, 1); //当前Date
+            var firstday = nstr.getDay();//星期几 
+            var m_days = new Array(31, 28 + is_leap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
+            var tr_str = Math.ceil((m_days[month] + firstday) / 7);
+            for (i = 0; i < tr_str; i++) { //表格的行
+                var tr = document.createElement("tr");
+                for (k = 0; k < 7; k++) { //表格每行的单元格
+                    var td = document.createElement("td");
+                    idx = i * 7 + k;
+                    date_str = idx - firstday + 1;
+                    (date_str <= 0 || date_str > m_days[month]) ? date_str = "" : date_str = idx - firstday + 1; //过滤
+                    td.innerText = date_str;
+                    if (date_str != '') {
+                        td.onclick = function () {
+                            var day = new Date(year, month, this.innerText);
+
+                            var t0 = day.getDay();
+                            var dayName; var monthName;
+                            switch (t0) {
+                                case 0: dayName = "Sunday"; break;
+                                case 1: dayName = "Monday"; break;
+                                case 2: dayName = "Tuesday"; break;
+                                case 3: dayName = "Wednesday"; break;
+                                case 4: dayName = "Thursday"; break;
+                                case 5: dayName = "Friday"; break;
+                                case 6: dayName = "Saturday"; break;
+                            }
+                            switch (month) {
+                                case 0: monthName = year+" January"; break;
+                                case 1: monthName = year+" February"; break;
+                                case 2: monthName = year+" March"; break;
+                                case 3: monthName = year+" April"; break;
+                                case 4: monthName = year+" May"; break;
+                                case 5: monthName = year+" June"; break;
+                                case 6: monthName = year+" July";break;
+                                case 7: monthName = year+" August"; break;
+                                case 8: monthName = year+" September"; break;
+                                case 9: monthName = year+" October"; break;
+                                case 10: monthName = year+" November"; break;
+                                case 11: monthName = year+" December"; break;
+                            }
+                            document.getElementById("left-weekday").innerHTML = monthName;
+                            document.getElementById("left-day").innerHTML = this.innerText + " , " + dayName;
+                            var a = document.getElementsByTagName("td");
+                            for (var i = 0; i < a.length; i++) {
+                                a[i].style.backgroundColor = "white";
+                                a[i].style.color = "black";
+                            }
+                            this.style.backgroundColor = "#f38588";
+                            this.style.color = "white";
+
+                        }
+
+                    } else {
+                        td.className = "none-td";
+                    }
+                    tr.appendChild(td);
+                }
+                calend.appendChild(tr);
+            }
+            var monthName = document.getElementById("month-name");
+
+            switch (month + 1) {
+                case 1: monthName.innerHTML = "January " + year; break;
+                case 2: monthName.innerHTML = "February " + year; break;
+                case 3: monthName.innerHTML = "March " + year; break;
+                case 4: monthName.innerHTML = "April " + year; break;
+                case 5: monthName.innerHTML = "May " + year; break;
+                case 6: monthName.innerHTML = "June " + year; break;
+                case 7: monthName.innerHTML = "July " + year; break;
+                case 8: monthName.innerHTML = "August " + year; break;
+                case 9: monthName.innerHTML = "September " + year; break;
+                case 10: monthName.innerHTML = "October " + year; break;
+                case 11: monthName.innerHTML = "November " + year; break;
+                case 12: monthName.innerHTML = "December " + year; break;
+            }
+        }
+        var myDate = new Date();
+        var yy = myDate.getFullYear();
+        var mm = myDate.getMonth() + 1;
+        createC(yy, mm);
+        document.getElementById("year").value = yy + "年" + mm + "月";
+
+    </script>
+</body>
+
+
+</html>

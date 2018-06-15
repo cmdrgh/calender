@@ -1,0 +1,181 @@
+        body {
+            cursor: default;
+        }
+
+        .main-left {
+            position: relative;
+            font-size: 40px;
+            text-align: center;
+            color: snow;
+            background-color: #f38588;
+            height: 100%;
+            width: 570px;
+            margin: 0;
+        }
+
+        #left-weekday {
+            position: absolute;
+            top: 110px;
+            left: 70px;
+            width: 400px;
+            height: 100px;
+            text-align: left;
+        }
+
+        #left-day {
+            position: absolute;
+            top: 200px;
+            left: 70px;
+            width: 400px;
+            height: 100px;
+            text-align: left;
+        }
+
+        #left-todo {
+            font-size: 27px;
+            position: absolute;
+            top: 560px;
+            left: 70px;
+            width: 400px;
+            height: 100px;
+            text-align: left;
+        }
+
+        #note {
+            border-color: snow;
+            border-top-width: 0px;
+            border-left-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 1px;
+            width: 400px;
+            height: 70px;
+            background-color: transparent;
+            color: white;
+            font-size: 35px;
+            position: absolute;
+            top: 480px;
+            left: 70px;
+        }
+
+        #add-pic {
+            position: absolute;
+            top: 480px;
+            left: 410px;
+            color: white;
+            width: 68px;
+            height: 68px;
+        }
+
+        #add-pic:hover {
+            position: absolute;
+            top: 479px;
+            left: 409px;
+            cursor: pointer;
+            width: 70px;
+            height: 70px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            width: 900px;
+            height: 200px;
+        }
+
+        .top-left {
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+        }
+
+
+        .top-left:hover {
+            cursor: pointer;
+            color: white !important;
+            background-color: #f38588 !important;
+        }
+
+        #month-name {
+            display: inline-block;
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .top-right {
+            cursor: pointer;
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+        }
+
+        .top-right:hover {
+            color: white;
+            background-color: #f38588;
+        }
+
+        #year {
+            color: #f38588;
+            position: absolute;
+            bottom: 0px;
+            right: -35px;
+            font-size: 22px;
+            height: 25px;
+            width: 180px;
+            text-align: center;
+            border: 0.5px solid #f38588;
+        }
+
+        #content table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td {
+            font-size: 19px;
+            text-align: center;
+            display: inline-block;
+            margin: 1px;
+            padding: 0;
+            width: 120px;
+            height: 70px;
+            line-height: 70px;
+        }
+
+        td:hover {
+            background-color: #f7a9aa !important;
+            color: white !important;
+        }
+
+        .none-td:hover{
+            background-color: white !important;
+            color: black !important;
+        }
+
+        /*.td_title:hover{
+            background-color: white !important;
+            color: black !important;
+        }*/
+
+        #container {
+            position: fixed;
+            left: 600px;
+            top: 0;
+            width: 900px;
+            height: 100%;
+        }
+
+
+
+        input:focus {
+            outline: none;
+        }
+
+        input::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: rgba(252, 252, 252, 0.692);
+
+        }
