@@ -3,11 +3,13 @@
         }
 
         .main-left {
+            border-radius:11px;
             position: relative;
             font-size: 40px;
             text-align: center;
             color: snow;
-            background-color: #f38588;
+            /*background-image: -webkit-radial-gradient(0px 0px, #FF99AC, #FF6A88,#FF9A8B); */
+            background-image: -webkit-linear-gradient(1deg, #FF9A8B, #FF6A88,#FF99AC); 
             height: 100%;
             width: 570px;
             margin: 0;
@@ -94,7 +96,7 @@
         .top-left:hover {
             cursor: pointer;
             color: white !important;
-            background-color: #f38588 !important;
+            background-image: -webkit-linear-gradient(1deg, #FF9A8B, #FF6A88,#FF99AC); 
         }
 
         #month-name {
@@ -113,11 +115,11 @@
 
         .top-right:hover {
             color: white;
-            background-color: #f38588;
+            background-image: -webkit-linear-gradient(1deg, #FF9A8B, #FF6A88,#FF99AC); 
         }
 
         #year {
-            color: #f38588;
+            color: #f38f92;
             position: absolute;
             bottom: 0px;
             right: -35px;
@@ -125,7 +127,7 @@
             height: 25px;
             width: 180px;
             text-align: center;
-            border: 0.5px solid #f38588;
+            border: 0.5px solid #f38f92;
         }
 
         #content table {
@@ -134,7 +136,7 @@
             text-align: center;
         }
 
-        td {
+        td {border-radius:11px;
             font-size: 19px;
             text-align: center;
             display: inline-block;
@@ -146,7 +148,7 @@
         }
 
         td:hover {
-            background-color: #f7a9aa !important;
+            background-color: #fac7c8ef !important;
             color: white !important;
         }
 

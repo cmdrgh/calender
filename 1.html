@@ -210,48 +210,44 @@
                     td.innerText = date_str;
                     if (date_str != '') {
                         td.onclick = function () {
+                            var myDate = new Date();
+                    var yy = myDate.getFullYear();
+                    var mm = myDate.getMonth();
+                    var dd = myDate.getDate();
+                    //if(yy==year&&month==mm)return;
                             var day = new Date(year, month, this.innerText);
-
+                            
                             var t0 = day.getDay();
-                            var dayName; var monthName;
-                            switch (t0) {
-                                case 0: dayName = "Sunday"; break;
-                                case 1: dayName = "Monday"; break;
-                                case 2: dayName = "Tuesday"; break;
-                                case 3: dayName = "Wednesday"; break;
-                                case 4: dayName = "Thursday"; break;
-                                case 5: dayName = "Friday"; break;
-                                case 6: dayName = "Saturday"; break;
-                            }
-                            switch (month) {
-                                case 0: monthName = year+" January"; break;
-                                case 1: monthName = year+" February"; break;
-                                case 2: monthName = year+" March"; break;
-                                case 3: monthName = year+" April"; break;
-                                case 4: monthName = year+" May"; break;
-                                case 5: monthName = year+" June"; break;
-                                case 6: monthName = year+" July";break;
-                                case 7: monthName = year+" August"; break;
-                                case 8: monthName = year+" September"; break;
-                                case 9: monthName = year+" October"; break;
-                                case 10: monthName = year+" November"; break;
-                                case 11: monthName = year+" December"; break;
-                            }
-                            document.getElementById("left-weekday").innerHTML = monthName;
-                            document.getElementById("left-day").innerHTML = this.innerText + " , " + dayName;
+                            left(this,year,month,t0);
                             var a = document.getElementsByTagName("td");
                             for (var i = 0; i < a.length; i++) {
-                                a[i].style.backgroundColor = "white";
+                                if(year==yy&&month==mm&&a[i].innerText==dd)continue;
+                                a[i].style.backgroundImage = "none";
                                 a[i].style.color = "black";
                             }
-                            this.style.backgroundColor = "#f38588";
+                            if(year==yy&&month==mm&&this.innerText==dd)return;
+                            
+                            this.style.backgroundImage = "-webkit-linear-gradient(43deg, #FF6A88,rgb(255, 178, 192))";
                             this.style.color = "white";
-
                         }
 
                     } else {
                         td.className = "none-td";
                     }
+                    var myDate = new Date();
+                    var yy = myDate.getFullYear();
+                    var mm = myDate.getMonth();
+                    var dd = myDate.getDate();
+                    var day = new Date(yy, mm, dd);
+                            var t0 = day.getDay();
+                    if (year == yy && month == mm && dd == date_str) {
+
+                        td.style.backgroundImage = "-webkit-linear-gradient(43deg,#4158D0,#FC00FF)";
+                       
+                        td.style.color = "white ";
+                    }
+                    left2(yy,mm,t0,dd);
+                    
                     tr.appendChild(td);
                 }
                 calend.appendChild(tr);
@@ -272,6 +268,62 @@
                 case 11: monthName.innerHTML = "November " + year; break;
                 case 12: monthName.innerHTML = "December " + year; break;
             }
+        }
+        function left(i,year,m,d){
+            var dayName; var monthName;
+                            switch (d) {
+                                case 0: dayName = "Sunday"; break;
+                                case 1: dayName = "Monday"; break;
+                                case 2: dayName = "Tuesday"; break;
+                                case 3: dayName = "Wednesday"; break;
+                                case 4: dayName = "Thursday"; break;
+                                case 5: dayName = "Friday"; break;
+                                case 6: dayName = "Saturday"; break;
+                            }
+                            switch (m) {
+                                case 0: monthName = year + " January"; break;
+                                case 1: monthName = year + " February"; break;
+                                case 2: monthName = year + " March"; break;
+                                case 3: monthName = year + " April"; break;
+                                case 4: monthName = year + " May"; break;
+                                case 5: monthName = year + " June"; break;
+                                case 6: monthName = year + " July"; break;
+                                case 7: monthName = year + " August"; break;
+                                case 8: monthName = year + " September"; break;
+                                case 9: monthName = year + " October"; break;
+                                case 10: monthName = year + " November"; break;
+                                case 11: monthName = year + " December"; break;
+                            }
+                            document.getElementById("left-weekday").innerHTML = monthName;
+                            document.getElementById("left-day").innerHTML = i.innerText + " , " + dayName;
+        }
+        function left2(year,m,d,dd){
+            var dayName; var monthName;
+                            switch (d) {
+                                case 0: dayName = "Sunday"; break;
+                                case 1: dayName = "Monday"; break;
+                                case 2: dayName = "Tuesday"; break;
+                                case 3: dayName = "Wednesday"; break;
+                                case 4: dayName = "Thursday"; break;
+                                case 5: dayName = "Friday"; break;
+                                case 6: dayName = "Saturday"; break;
+                            }
+                            switch (m) {
+                                case 0: monthName = year + " January"; break;
+                                case 1: monthName = year + " February"; break;
+                                case 2: monthName = year + " March"; break;
+                                case 3: monthName = year + " April"; break;
+                                case 4: monthName = year + " May"; break;
+                                case 5: monthName = year + " June"; break;
+                                case 6: monthName = year + " July"; break;
+                                case 7: monthName = year + " August"; break;
+                                case 8: monthName = year + " September"; break;
+                                case 9: monthName = year + " October"; break;
+                                case 10: monthName = year + " November"; break;
+                                case 11: monthName = year + " December"; break;
+                            }
+                            document.getElementById("left-weekday").innerHTML = monthName;
+                            document.getElementById("left-day").innerHTML = dd + " , " + dayName;
         }
         var myDate = new Date();
         var yy = myDate.getFullYear();
