@@ -1,0 +1,199 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>calendar</title>
+    <link rel="stylesheet" href="css/2.css">
+    <link href="css/1.css" rel="stylesheet" type="text/css" />
+    <script src="js/1.js"></script>
+    <script src="js/2.js"></script>
+    <script src="js/主页面.js"></script>
+</head>
+
+<body>
+    <div class="main-left">
+        <div id="left-weekday"></div>
+        <div id="left-day"></div>
+        <div id="left-classification">
+            <div class="left-classification-all">
+                <img src="pic/日历填充.png">
+                <a>日历</a>
+            </div>
+            <div class="left-classification-all">
+                <img src="pic/文本编辑填充.png">
+                <a>日记本</a>
+            </div>
+            <div class="left-classification-all">
+                <img src="pic/home-fill.png">
+                <a>生活</a>
+            </div>
+            <div class="left-classification-all">
+                <img src="pic/shopping-fill.png">
+                <a>工作</a>
+            </div>
+            <div class="left-classification-all">
+                <img src="pic/heart-fill.png">
+                <a>纪念日</a>
+            </div>
+        </div>
+        <div id="left-todo">Record our daily life bit by bit!</div>
+    </div>
+    <div id="container">
+        <div class="login">
+            <img src="pic/用户.png">
+            <p id="login-btn1">登录</p>
+            <p id="login-btn2">注册</p>
+        </div>
+        <div class="top">
+            <div class="top-left" onclick="add1()">❮❮</div>
+            <div class="top-left2" onclick="add()">❮</div>
+            <div id="month-name">APRIL</div>
+            <div class="top-right" onclick="minus()">❯</div>
+            <div class="top-right2" onclick="minus1()">❯❯</div>
+        </div>
+        <table id="calendar-weekday">
+            <tr>
+                <td class="td_title">Sun</td>
+                <td class="td_title">Mon</td>
+                <td class="td_title">Tues</td>
+                <td class="td_title">Wed</td>
+                <td class="td_title">Thur</td>
+                <td class="td_title">Fri</td>
+                <td class="td_title">Sat</td>
+            </tr>
+        </table>
+        <div id="content">
+            <table id="calendar">
+            </table>
+        </div>
+        <input id="year" value="2016年7月" oninput="newDate()" />
+        <button id="bbb3">0</button>
+        <div id="num"></div>
+    </div>
+    <div id="login-part">
+        <button id="login-part-closeBtn">✖</button>
+        <div id="login-part-top">
+            <p class="login-part-top-p" id="login-focus">账号登录</p>
+            <p class="login-part-top-p" id="register-focus">用户注册</p>
+        </div>
+        <div id="login-part-bottom1">
+            <img class="login-part-username-pic" src="pic/用户2.png">
+            <img class="login-part-password-pic" src="pic/密码2.png">
+            <input id="username1" type="text" data-placeholder="true" placeholder="账号">
+            <input id="password1" type="password" placeholder="密码">
+            <button id="login-part-button1">登录</button>
+        </div>
+        <div id="login-part-bottom2">
+            <img class="login-part-username-pic" src="pic/用户2.png">
+            <img class="login-part-password-pic" src="pic/密码2.png">
+            <input id="username2" type="text" placeholder="账号">
+            <input id="password2" type="password" placeholder="密码">
+            <button id="login-part-button2">注册</button>
+        </div>
+        <img id="login-part-bottom-pic" src="pic/二维码.png">
+    </div>
+    <div id="ly"></div>
+</body>
+<script type="text/javascript">
+
+        $(document).on("pagecreate", "#content", function () {
+            //alert("1234");
+        });
+        $("td").dblclick(function(){
+            alert("q");
+        })
+
+        $("#login-part-button1").click(function () {
+            var myHeaders = new Headers({ "Content-Type": "application/json" });
+            var myInit = {
+                method: 'POST',
+                headers: myHeaders,
+                mode: 'cors',
+                cache: 'default',
+                body: JSON.stringify({username:"1",password:"2"})
+            };
+            fetch("https://127.0.0.1:5000/note", myInit).then(function (response) {
+                return response.json().then(function (json) {
+                    $("#username1").val() = "";
+                    $("#password1").val() = "";
+                    alert(json.message) ;
+                })
+            })
+        });
+
+        $("#login-part-button2").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "127.0.0.1:5000/note",
+                dataType: "json",
+                data: {
+                    username1: $("#username2").val(),
+                    password1: $("#password2").val()
+                },
+            });
+            $("#username2").val() = "";
+            $("#password2").val() = "";
+        });
+
+    $(".left-classification-all").click(function () {
+        if (document.getElementById("login-btn1").innerHTML == "登录") {
+            document.getElementById("login-btn2").click();
+        }
+        this.childNodes[3].click();
+    });
+
+    document.getElementById("login-part-closeBtn").addEventListener("click", function () {
+        document.all.ly.style.display = "none";
+        document.getElementById("login-part").style.display = "none";
+    });
+    document.getElementById("login-focus").addEventListener("click", function () {
+        var l = document.getElementsByClassName("login-part-top-active").length;
+        for (var i = 0; i < l; i++) {
+            document.getElementsByClassName("login-part-top-active")[i].className = "login-part-top-p";
+            i--; l--;
+        }
+        this.className = "login-part-top-active";
+        document.getElementById("login-part-bottom1").style.display = "block";
+        document.getElementById("login-part-bottom2").style.display = "none";
+    });
+
+    document.getElementById("register-focus").addEventListener("click", function () {
+        var l = document.getElementsByClassName("login-part-top-active").length;
+        for (var i = 0; i < l; i++) {
+            document.getElementsByClassName("login-part-top-active")[i].className = "login-part-top-p";
+            i--; l--;
+        }
+        this.className = "login-part-top-active";
+        document.getElementById("login-part-bottom2").style.display = "block";
+        document.getElementById("login-part-bottom1").style.display = "none";
+    });
+
+    document.getElementById("login-btn2").addEventListener("click", function () {
+        document.all.ly.style.display = "block";
+        document.all.ly.style.width = document.body.clientWidth;
+        document.all.ly.style.height = document.body.clientHeight;
+        document.getElementById("login-part").style.display = "block";
+        document.getElementById("register-focus").click();
+    });
+
+    document.getElementById("login-btn1").addEventListener("click", function () {
+        document.all.ly.style.display = "block";
+        document.all.ly.style.width = document.body.clientWidth;
+        document.all.ly.style.height = document.body.clientHeight;
+        document.getElementById("login-part").style.display = "block";
+        document.getElementById("login-focus").click();
+    });
+
+    document.getElementById("ly").addEventListener("click", function () {
+        document.all.ly.style.display = "none";
+        document.getElementById("login-part").style.display = "none";
+    });
+    var myDate = new Date();
+    var yy = myDate.getFullYear();
+    var mm = myDate.getMonth() + 1;
+    document.getElementById("year").value = yy + "年" + mm + "月";
+    document.getElementById("num").innerHTML = myDate.getDate();
+    createC(yy, mm);
+</script>
+
+</html>

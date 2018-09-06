@@ -1,0 +1,237 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>日记页面</title>
+    <link href="css/日记界面.css" rel="stylesheet" type="text/css" />
+    <link href="css/日记界面2.css" rel="stylesheet" type="text/css" />
+    <script src="js/jq.js"></script>
+    <script type="text/javascript" src="js/日记页面.js"></script>
+</head>
+
+<body>
+    <div class="main-left">
+        <div id="left-weekday">我的日记本</div>
+        <input id="note" placeholder="记录你的生活">
+        <img id="note-btn" src="pic/add.png">
+        <div id="left-classification">
+            <div class="left-classification-all">
+                <img src="pic/日历填充.png">
+                <a href="http://www.baidu.com">日历</a>
+            </div>
+            <div class="left-classification-all">
+                <img src="pic/文本编辑填充.png">
+                <a href="http://www.baidu.com">日记本</a>
+            </div>
+            <div id="container">
+                <div class="top">
+                    <div class="top-left" onclick="add1()">❮❮</div>
+                    <div class="top-left2" onclick="add()">❮</div>
+                    <input id="year" value="" oninput="newDate()" />
+                    <div class="top-right" onclick="minus()">❯</div>
+                    <div class="top-right2" onclick="minus1()">❯❯</div>
+                </div>
+                <div id="content">
+                    <table id="calendar">
+                    </table>
+                </div>
+            </div>
+            <div id="month-name">APRIL</div>
+        </div>
+    </div>
+    <div id="top-part">
+        <div class="top-part-title">
+            <img id="top-part-title-pic" src="pic/app store.png">
+            <select id="top-classify">
+                <option value="全部">全部</option>
+                <option value="生活">生活</option>
+                <option value="工作">工作</option>
+                <option value="纪念日">纪念日</option>
+            </select>
+            <p id="top-part-title-num">此主题拥有58篇日记</p>
+        </div>
+        <div class="top-part-center">
+            <div class="search-title">日记搜索：</div>
+            <input class="search-input" type="text" placeholder="" />
+            <button id="search-btn" onclick="search()">
+                <img class="top-pic1" src="pic/搜索填充.png">
+            </button>
+        </div>
+        <div class="login">
+            <img src="pic/用户.png">
+            <p id="login-btn">饶光赫</p>
+        </div>
+    </div>
+    <div id="container-part">
+        <div class="container-part-daily">
+            <div class="container-part-daily-tl">忙碌的一天</div>
+            <pre class="container-part-daily-mid">  今天真是好忙
+哈哈哈哈或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈哈哈哈哈或或或或或或或哈哈哈哈或
+哈哈哈哈或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈哈哈哈哈或或或或或或或哈哈哈哈或ff
+</pre>
+            <div class="container-part-daily-tr">
+                <img src="pic/tags.png"><div>生活</div>
+            </div>
+            <img class="container-part-daily-tr-modify" src="pic/输入填充.png">
+            <img class="container-part-daily-tr-delete" src="pic/delete-pic.png">
+            <div class="container-part-daily-br">2018-07-24 18:59:30</div>
+        </div>
+        <div class="container-part-daily">
+            <div class="container-part-daily-tl">忙碌的二天</div>
+            <pre class="container-part-daily-mid">  今天真是好忙
+哈哈哈哈或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈或或或或或或或哈哈哈哈哈哈哈哈或或或或或或或哈哈哈哈或ff
+</pre>
+            <div class="container-part-daily-tr">
+                <img src="pic/tags.png"><div>工作</div>
+            </div>
+            <img class="container-part-daily-tr-modify" src="pic/输入填充.png">
+            <img class="container-part-daily-tr-delete" src="pic/delete-pic.png">
+            <div class="container-part-daily-br">2018-07-24 18:59:30</div>
+        </div>
+    </div>
+    <div id="submit-part">
+        <button id="submit-part-closeBtn">✖</button>
+        <div id="submit-t">记录你的生活</div>
+        <div id="submit-time">2018-07-24</div>
+        <input id="submit-title" placeholder="输入你的标题">
+        <textarea id="submit-text" rows="3" cols="3" placeholder="输入你的内容"></textarea>
+
+        <select id="submit-classify">
+            <option value="生活">生活</option>
+            <option value="工作">工作</option>
+            <option value="纪念日">纪念日</option>
+        </select>
+        <button id="submit-btn">保存</button>
+
+    </div>
+    <div id="ly"></div>
+</body>
+<script type="text/javascript">
+    $(".container-part-daily-tr-delete").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "127.0.0.1:5000/note",
+            dataType: "json",
+            data: {
+               // name1: $(this).parent()[11].html,
+                order: "delete"
+            },
+        });
+        alert($(this).parent()[11].html);
+    })
+    $(".container-part-daily-tr-modify").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "127.0.0.1:5000/note",
+            dataType: "json",
+            data: {
+                //name1: $(this).parent()[11].html,
+                order: "modify"
+            },
+        });
+        document.getElementById("note-btn").click();
+        var a1=this.parentNode.childNodes[5].childNodes[2].innerHTML;
+        if(a1=="生活")$("#submit-classify").find("option[value='生活']").attr("selected",true);
+        if(a1=="工作")$("#submit-classify").find("option[value='工作']").attr("selected",true);
+        if(a1=="纪念日")$("#submit-classify").find("option[value=纪念日]").attr("selected",true);
+        document.getElementById("submit-time").innerHTML = this.parentNode.childNodes[11].innerHTML;
+        document.getElementById("submit-title").value = this.parentNode.childNodes[1].innerHTML;
+        document.getElementById("submit-text").value = this.parentNode.childNodes[3].innerHTML;
+    })
+    $("#submit-btn").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "127.0.0.1:5000/note",
+            dataType: "json",
+            data: {
+                time: $("#submit-time").html(),
+                title: $("#submit-title").val(),
+                content: $("#submit-text").val(),
+                classify: $("#submit-classify option:selected").val()
+            },
+        });
+        document.getElementById("submit-title").value = "";
+        document.getElementById("submit-text").value = "";
+        document.getElementById("submit-text").value = ""
+    });
+    $(".left-classification-all").click(function () {
+        this.childNodes[3].click();
+    });
+    document.getElementById("search-btn").addEventListener("click",function(){
+        $.ajax({
+            type: "POST",
+            url: "127.0.0.1:5000/note",
+            dataType: "json",
+            data: {
+                search: $(".search-input").first().val(),
+            },
+        });
+    })
+    document.getElementById("top-classify").onchange = function () {
+        if($("#top-classify option:selected").val()=="生活")
+            window.open('http://127.0.0.1:5000/note/t=1','_self');
+if($("#top-classify option:selected").val()=="工作")
+            window.open('http://127.0.0.1:5000/note/t=2','_self');
+if($("#top-classify option:selected").val()=="纪念日")
+            window.open('http://127.0.0.1:5000/note/t=3','_self');
+
+
+    }
+    document.getElementById("submit-part-closeBtn").addEventListener("click", function () {
+        document.all.ly.style.display = "none";
+        document.getElementById("submit-part").style.display = "none";
+        document.getElementById("submit-title").value = "";
+        document.getElementById("submit-text").value = "";
+    });
+    document.getElementById("note-btn").addEventListener("click", function () {
+        document.getElementById("submit-title").value = document.getElementById("note").value;
+        document.getElementById("note").value = "";
+        document.getElementById("submit-time").innerHTML = document.getElementById("year").value + " " + myDate.getHours() + "-" + myDate.getMinutes() + "-" + myDate.getSeconds();
+        document.all.ly.style.display = "block";
+        document.all.ly.style.width = document.body.clientWidth;
+        document.all.ly.style.height = document.body.clientHeight;
+        document.getElementById("submit-part").style.display = "block";
+    });
+
+    document.getElementById("ly").addEventListener("click", function () {
+        document.all.ly.style.display = "none";
+        document.getElementById("submit-part").style.display = "none";
+        document.getElementById("submit-title").value = "";
+        document.getElementById("submit-text").value = "";
+    });
+
+
+    function left2(year, m, d, dd) {
+        var dayName; var monthName;
+        switch (d) {
+            case 0: dayName = "Sunday"; break;
+            case 1: dayName = "Monday"; break;
+            case 2: dayName = "Tuesday"; break;
+            case 3: dayName = "Wednesday"; break;
+            case 4: dayName = "Thursday"; break;
+            case 5: dayName = "Friday"; break;
+            case 6: dayName = "Saturday"; break;
+        }
+        //  document.getElementById("left-day").innerHTML = dd + " , " + dayName;
+    }
+    var myDate = new Date();
+    var yy = myDate.getFullYear();
+    var mm = myDate.getMonth() + 1;
+    var dd = myDate.getDate();
+    if (dd < 10 && mm < 10) {
+        document.getElementById("year").value = yy + "-0" + mm + "-0" + dd;
+    }
+    if (dd >= 10 && mm < 10) {
+        document.getElementById("year").value = yy + "-0" + mm + "-" + dd;
+    }
+    if (dd < 10 && mm >= 10) {
+        document.getElementById("year").value = yy + "-" + mm + "-0" + dd;
+    }
+    if (dd >= 10 && mm >= 10) {
+        document.getElementById("year").value = yy + "-" + mm + "-" + dd;
+    }
+    createC(yy, mm, dd);
+</script>
+
+
+</html>
